@@ -41,8 +41,8 @@ namespace Lab01.Controllers
         }
         public ActionResult Import()
         {
-            //return View();
-            return HttpNotFound();
+            return View();
+            //return HttpNotFound();
         }
     }
 }
