@@ -14,19 +14,19 @@ namespace Lab01.Controllers
             return View();
         }
 
-       /* public ActionResult About()
+       public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Instrucciones de Uso";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Desarrolladores";
 
             return View();
-        }*/
+        }
 
 
     }
