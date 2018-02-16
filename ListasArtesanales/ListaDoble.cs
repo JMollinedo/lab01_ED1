@@ -128,7 +128,7 @@ namespace ListasArtesanales
             Last = null;
         }
 
-        public ListaDoble<T> Find(T Value)
+        public ListaDoble<T> Search(T Value)
         {
             ListaDoble<T> list = new ListaDoble<T>();
             NodoDoble<T> Temp = First;
@@ -137,7 +137,24 @@ namespace ListasArtesanales
             {
                 if (Temp.Value.Equals(Value))
                 {
-                    list.Add(Value);
+                    list.Add(Temp.Value);
+                }
+                Temp = Temp.Next;
+                i++;
+            } while (i < Count);
+            return list;
+        }
+
+        public ListaDoble<T> Search(Predicate<T> anon)
+        {
+            ListaDoble<T> list = new ListaDoble<T>();
+            NodoDoble<T> Temp = First;
+            int i = 0;
+            do
+            {
+                if (anon(Temp.Value))
+                {
+                    list.Add(Temp.Value);
                 }
                 Temp = Temp.Next;
                 i++;
@@ -171,7 +188,7 @@ namespace ListasArtesanales
             }
         }
 
-        private void SortAsArray(T[] array, int floor, int top)
+        private void SortAsArray(T[] array, int floor, int top ,Delegate comparer)
         {
 
             int start = floor;
@@ -182,8 +199,10 @@ namespace ListasArtesanales
             T Pivot = array[mid];
             do
             {
-                while (array[start].CompareTo(Pivot) < 0) start++;
-                while (array[end].CompareTo(Pivot) > 0) end--;
+                while ((int)comparer.DynamicInvoke(array[start], Pivot) < 0) start++;
+                //while (array[start].CompareTo(Pivot) < 0) start++;
+                while ((int)comparer.DynamicInvoke(array[start], Pivot) > 0) end++;
+                //while (array[end].CompareTo(Pivot) > 0) end--;
                 if (start <= end)
                 {
                     Aux = array[start];
@@ -195,20 +214,20 @@ namespace ListasArtesanales
             } while (start <= end);
             if (floor < end)
             {
-                SortAsArray(array, floor, end);
+                SortAsArray(array, floor, end, comparer);
             }
             if (start < top)
             {
-                SortAsArray(array, start, top);
+                SortAsArray(array, start, top, comparer);
             }
         }
 
-        public void Sort()
+        public void Sort(Delegate comparer)
         {
             if (Count > 0)
             {
                 T[] array = ToArray();
-                SortAsArray(array, 0, Count - 1);
+                SortAsArray(array, 0, Count - 1, comparer);
                 NodoDoble<T> Temp = First;
                 for (int i = 0; i < Count; i++)
                 {

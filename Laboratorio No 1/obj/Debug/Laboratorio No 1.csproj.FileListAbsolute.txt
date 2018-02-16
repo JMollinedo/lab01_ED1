@@ -238,3 +238,5 @@ C:\Users\pablo\Desktop\Github\lab01_ED1\Laboratorio No 1\bin\es\System.Web.WebPa
 C:\Users\pablo\Desktop\Github\lab01_ED1\Laboratorio No 1\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\pablo\Desktop\Github\lab01_ED1\Laboratorio No 1\bin\es\System.Web.WebPages.Razor.resources.dll
 C:\Users\pablo\Desktop\Github\lab01_ED1\Laboratorio No 1\obj\Debug\Laboratorio No 1.dll
+C:\Users\jmoll\Documents\URL\ReposGitED1\lab01_ED1\Laboratorio No 1\bin\ListasArtesanales.dll
+C:\Users\jmoll\Documents\URL\ReposGitED1\lab01_ED1\Laboratorio No 1\bin\ListasArtesanales.pdb

@@ -8,7 +8,7 @@ namespace ListasArtesanales
 {
     public class LinkList<T> : LinkedList<T> where T : IComparable
     {
-        private void SortAsArray(T[] array, int floor, int top)
+        private void SortAsArray(T[] array, int floor, int top, Delegate comparer)
         {
 
             int start = floor;
@@ -19,8 +19,10 @@ namespace ListasArtesanales
             T Pivot = array[mid];
             do
             {
-                while (array[start].CompareTo(Pivot) < 0) start++;
-                while (array[end].CompareTo(Pivot) > 0) end--;
+                while ((int)comparer.DynamicInvoke(array[start], Pivot) < 0) start++;
+                //while (array[start].CompareTo(Pivot) < 0) start++;
+                while ((int)comparer.DynamicInvoke(array[start], Pivot) > 0) end++;
+                //while (array[end].CompareTo(Pivot) > 0) end--;
                 if (start <= end)
                 {
                     Aux = array[start];
@@ -32,20 +34,20 @@ namespace ListasArtesanales
             } while (start <= end);
             if (floor < end)
             {
-                SortAsArray(array, floor, end);
+                SortAsArray(array, floor, end, comparer);
             }
             if (start < top)
             {
-                SortAsArray(array, start, top);
+                SortAsArray(array, start, top, comparer);
             }
         }
 
-        public void Sort()
+        public void Sort(Delegate comparer)
         {
             if (Count > 0)
             {
                 T[] array = this.ToArray();
-                SortAsArray(array, 0, Count - 1);
+                SortAsArray(array, 0, Count - 1, comparer);
                 Clear();
                 foreach (T data in array)
                 {
@@ -68,6 +70,19 @@ namespace ListasArtesanales
             foreach (T item in this)
             {
                 if (item.Equals(Value))
+                {
+                    list.AddLast(item);
+                }
+            }
+            return list;
+        }
+
+        public LinkList<T> Search(Predicate<T> anon)
+        {
+            LinkList<T> list = new LinkList<T>();
+            foreach (T item in this)
+            {
+                if (anon(item))
                 {
                     list.AddLast(item);
                 }
