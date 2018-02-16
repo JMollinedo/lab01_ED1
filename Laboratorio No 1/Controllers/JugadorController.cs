@@ -264,5 +264,10 @@ namespace Laboratorio_No_1.Controllers
             }
             return View();
         }
+
+        public ActionResult SerchByName()
+        {
+            return View();
+        }
     }
 }

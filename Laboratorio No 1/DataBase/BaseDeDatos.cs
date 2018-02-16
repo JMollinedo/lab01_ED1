@@ -13,7 +13,7 @@ namespace Laboratorio_No_1.DataBase
         private static volatile BaseDeDatos Instance;
         private static object syncRoot = new Object();
 
-        public LinkedList <Jugador> Players = new LinkedList<Jugador>();
+        public LinkList <Jugador> Players = new LinkList<Jugador>();
         public int ActualID { get; set; }
 
         private BaseDeDatos()

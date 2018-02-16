@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Laboratorio_No_1.Models
 {
-    public class Jugador
+    public class Jugador : IComparable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -62,6 +62,19 @@ namespace Laboratorio_No_1.Models
             igual = igual && jugador.Salary == Salary;
             igual = igual && jugador.position == position;
             return igual;
+        }
+
+        public int CompareTo(object obj)
+        {
+            try
+            {
+                Jugador jugador = obj as Jugador;
+                return jugador.Id < Id ? -1 : jugador.Id == Id ? 0 : 1;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
     }
 }
