@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ListasArtesanales
 {
-    class LinkList<T> : LinkedList<T> where T : IComparable
+    public class LinkList<T> : LinkedList<T> where T : IComparable
     {
         private void SortAsArray(T[] array, int floor, int top)
         {

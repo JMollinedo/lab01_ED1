@@ -128,7 +128,7 @@ namespace ListasArtesanales
             Last = null;
         }
 
-        public ListaDoble<T> Search(T Value)
+        public ListaDoble<T> Find(T Value)
         {
             ListaDoble<T> list = new ListaDoble<T>();
             NodoDoble<T> Temp = First;
