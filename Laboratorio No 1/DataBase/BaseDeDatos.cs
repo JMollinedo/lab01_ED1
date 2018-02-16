@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ListasArtesanales;
 
 namespace Laboratorio_No_1.DataBase
 {
@@ -12,7 +13,7 @@ namespace Laboratorio_No_1.DataBase
         private static volatile BaseDeDatos Instance;
         private static object syncRoot = new Object();
 
-        public List<Jugador> Players = new List<Jugador>();
+        public LinkedList <Jugador> Players = new LinkedList<Jugador>();
         public int ActualID { get; set; }
 
         private BaseDeDatos()

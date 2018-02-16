@@ -28,7 +28,7 @@ namespace Laboratorio_No_1.Controllers
             {
                 return HttpNotFound();
             }
-            Jugador JugadorAMostrar = Datos.Players.Find(x => x.Id == id);
+            Jugador JugadorAMostrar = Datos.Players.FirstOrDefault(x => x.Id == id);
             if (JugadorAMostrar== null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace Laboratorio_No_1.Controllers
             {
                 // TODO: Add insert logic here
                 NuevoJugador.Id = ++Datos.ActualID;
-                Datos.Players.Add(NuevoJugador);
+                Datos.Players.AddFirst(NuevoJugador);
                 return RedirectToAction("Index");
             }
             catch
@@ -68,7 +68,7 @@ namespace Laboratorio_No_1.Controllers
                 return HttpNotFound();
             }
 
-                Jugador JugadorBuscado = Datos.Players.Find(x => x.Id == id);
+                Jugador JugadorBuscado = Datos.Players.FirstOrDefault(x => x.Id == id);
             if (JugadorBuscado == null)
             {
                 return HttpNotFound();
@@ -88,7 +88,7 @@ namespace Laboratorio_No_1.Controllers
             try
             {
               
-                Jugador JugadorBuscado = Datos.Players.Find(x => x.Id == int.Parse(Collection["Id"]));
+                Jugador JugadorBuscado = Datos.Players.FirstOrDefault(x => x.Id == int.Parse(Collection["Id"]));
                 if (JugadorBuscado == null)
                 {
                     return HttpNotFound();
@@ -118,7 +118,7 @@ namespace Laboratorio_No_1.Controllers
             {
                 return HttpNotFound();
             }
-            Jugador JugadorABorrar = Datos.Players.Find(x => x.Id == id);
+            Jugador JugadorABorrar = Datos.Players.FirstOrDefault(x => x.Id == id);
             if (JugadorABorrar == null)
             {
                 return HttpNotFound();
@@ -134,7 +134,7 @@ namespace Laboratorio_No_1.Controllers
             try
             {
                 // TODO: Add delete logic here
-                Jugador JugadorABorrar = Datos.Players.Find(x => x.Id == id);
+                Jugador JugadorABorrar = Datos.Players.FirstOrDefault(x => x.Id == id);
                 if (JugadorABorrar == null)
                 {
                     HttpNotFound();
@@ -189,7 +189,7 @@ namespace Laboratorio_No_1.Controllers
                             NuevoJugador.Id = ++Datos.ActualID;
 
                             //Agregar jugador a la lista.
-                            Datos.Players.Add(NuevoJugador);
+                            Datos.Players.AddLast(NuevoJugador);
 
                             //Leer siguiente linea
                             Linea  = Lector.ReadLine();
@@ -238,7 +238,7 @@ namespace Laboratorio_No_1.Controllers
                         {
                             //split de la linea
                             string[] Atributos = Linea.Split(',');
-                           Jugador JugadorABorrar = Datos.Players.Find(x => x.Club == Atributos[0] && x.LastName == Atributos[1] &&
+                           Jugador JugadorABorrar = Datos.Players.FirstOrDefault(x => x.Club == Atributos[0] && x.LastName == Atributos[1] &&
                             x.Name == Atributos[2] && x.position == Atributos[3] && x.Salary == double.Parse(Atributos[4]));
 
                             if (JugadorABorrar != null)
