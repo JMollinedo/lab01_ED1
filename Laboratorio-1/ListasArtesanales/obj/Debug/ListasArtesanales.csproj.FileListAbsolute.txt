@@ -1,0 +1,10 @@
+C:\Users\jmoll\Documents\URL\ReposGitED1\Laboratorio-1\ListasArtesanales\bin\Debug\ListasArtesanales.dll
+C:\Users\jmoll\Documents\URL\ReposGitED1\Laboratorio-1\ListasArtesanales\bin\Debug\ListasArtesanales.pdb
+C:\Users\jmoll\Documents\URL\ReposGitED1\Laboratorio-1\ListasArtesanales\obj\Debug\ListasArtesanales.csprojResolveAssemblyReference.cache
+C:\Users\jmoll\Documents\URL\ReposGitED1\Laboratorio-1\ListasArtesanales\obj\Debug\ListasArtesanales.dll
+C:\Users\jmoll\Documents\URL\ReposGitED1\Laboratorio-1\ListasArtesanales\obj\Debug\ListasArtesanales.pdb
+C:\Users\pablo\Desktop\Github\Laboratorio-1\ListasArtesanales\bin\Debug\ListasArtesanales.dll
+C:\Users\pablo\Desktop\Github\Laboratorio-1\ListasArtesanales\bin\Debug\ListasArtesanales.pdb
+C:\Users\pablo\Desktop\Github\Laboratorio-1\ListasArtesanales\obj\Debug\ListasArtesanales.csprojResolveAssemblyReference.cache
+C:\Users\pablo\Desktop\Github\Laboratorio-1\ListasArtesanales\obj\Debug\ListasArtesanales.dll
+C:\Users\pablo\Desktop\Github\Laboratorio-1\ListasArtesanales\obj\Debug\ListasArtesanales.pdb
