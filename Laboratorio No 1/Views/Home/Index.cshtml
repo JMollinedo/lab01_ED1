@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Liga MLS</h1>
+    <p class="lead">
+        Bienvenido a la Base de datos de los jugadores de la liga MLS, donde podrás, ver, crear, editar o elimnar jugadores.
+        También podrás ver el salario de los jugadores, su posición y al Club al que pertenecen.
+    </p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Utilizar Lista Artesanal</h2>
+        <p>
+            Si quieres utilizar una lista artensal (Creación propia), debes darle CLICK en el botón de abajo, de lo contrario
+            el programa hará su función con la lista implementada del lenguaje.
+        </p>
+        <p><a class="btn btn-default" >Lista Artesanal &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Carga de archivo</h2>
+        <p>
+            Si tienes una Archivo .CSV tendrás la opción de cargar el archivo, de esta manera se mostrará la lista de los jugadores que contenga
+            el archivo.</p>
+        <p><a class="btn btn-default" @Html.ActionLink("Adjuntar Archivo","Upload", "Jugador")> &raquo;</a></p>
+    </div>
+    @*<div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>*@
+</div>
