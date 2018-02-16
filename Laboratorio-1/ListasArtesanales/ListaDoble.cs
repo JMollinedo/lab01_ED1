@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ListasArtesanales
 {
+    // agregar predicados
     public class ListaDoble<T> : IEnumerable<T> where T : IComparable
     {
         public NodoDoble<T> First { get; private set; }
