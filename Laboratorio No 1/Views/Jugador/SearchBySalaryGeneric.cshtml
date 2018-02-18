@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Laboratorio_No_1.Models.Jugador>
 
 @{
-    ViewBag.Title = "Search By Name";
+    ViewBag.Title = "Salary";
 }
 
-<h2>Search By Name</h2>
+<h2>Salary</h2>
 
 
 @using (Html.BeginForm())
@@ -16,10 +16,10 @@
         <hr>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="Name">Name</label>
+            <label class="control-label col-md-2" for="Salary">Salary</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line" id="Name" name="Name" type="text" value="">
-                <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+                <input class="form-control text-box single-line" id="Salary" name="Salary" type="text" value="">
+                <span class="field-validation-valid text-danger" data-valmsg-for="Salary" data-valmsg-replace="true"></span>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Search" class="btn btn-default">
-            </div>  
+            </div>
         </div>
 
         <table class="table">
@@ -70,9 +70,9 @@
                             @Html.DisplayFor(modelItem => item.position)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            @Html.ActionLink("Edit", "EditGeneric", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "DetailsGeneric", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "DeleteGeneric", new { id = item.Id })
                         </td>
                     </tr>
 
@@ -86,13 +86,9 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "IndexGeneric")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-
-
-

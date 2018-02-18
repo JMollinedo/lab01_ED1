@@ -203,6 +203,22 @@
     <Content Include="Views\Jugador\Upload.cshtml" />
     <Content Include="Views\Jugador\Deleting.cshtml" />
     <Content Include="Views\Jugador\SerchByName.cshtml" />
+    <Content Include="Views\Jugador\SearchByLastName.cshtml" />
+    <Content Include="Views\Jugador\SearchByClub.cshtml" />
+    <Content Include="Views\Jugador\SearchBySalary.cshtml" />
+    <Content Include="Views\Jugador\SearchByPosition.cshtml" />
+    <Content Include="Views\Jugador\IndexGeneric.cshtml" />
+    <Content Include="Views\Jugador\CreateGeneric.cshtml" />
+    <Content Include="Views\Jugador\UploadGeneric.cshtml" />
+    <Content Include="Views\Jugador\DetailsGeneric.cshtml" />
+    <Content Include="Views\Jugador\EditGeneric.cshtml" />
+    <Content Include="Views\Jugador\DeleteGeneric.cshtml" />
+    <Content Include="Views\Jugador\DeletingGeneric.cshtml" />
+    <Content Include="Views\Jugador\SerchByNameGeneric.cshtml" />
+    <Content Include="Views\Jugador\SearchByLastNameGeneric.cshtml" />
+    <Content Include="Views\Jugador\SearchByClubGeneric.cshtml" />
+    <Content Include="Views\Jugador\SearchByPositionGeneric.cshtml" />
+    <Content Include="Views\Jugador\SearchBySalaryGeneric.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

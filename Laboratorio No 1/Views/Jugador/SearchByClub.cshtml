@@ -4,7 +4,7 @@
     ViewBag.Title = "Search By Name";
 }
 
-<h2>Search By Name</h2>
+<h2>Search By Last Name</h2>
 
 
 @using (Html.BeginForm())
@@ -16,10 +16,10 @@
         <hr>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="Name">Name</label>
+            <label class="control-label col-md-2" for="Club">Club</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line" id="Name" name="Name" type="text" value="">
-                <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+                <input class="form-control text-box single-line" id="Club" name="Club" type="text" value="">
+                <span class="field-validation-valid text-danger" data-valmsg-for="Club" data-valmsg-replace="true"></span>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Search" class="btn btn-default">
-            </div>  
+            </div>
         </div>
 
         <table class="table">
@@ -92,6 +92,13 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
+
+
+
+
 
 
 
