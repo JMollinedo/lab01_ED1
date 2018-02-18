@@ -11,16 +11,27 @@ namespace ListasArtesanales
 {
     public class LogWriter
     {
-        private string nombreLog;
+        private string rutaLog;
         public LogWriter()
         {
-            nombreLog = "log-LAB01_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".txt";
+            rutaLog = "log-LAB01_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".txt";
+            try
+            {
+                rutaLog = HttpContext.Current.Server.MapPath(rutaLog);
+            }
+            catch
+            {
+                rutaLog = "C:\\Users\\" + Environment.UserName + "\\" + rutaLog;
+            }
+            FileStream temp = File.Create(rutaLog);
+            temp.Close();
         }
 
         public void WriteLog(string mensaje, TimeSpan tiempo)
         {
-            StreamWriter escritor = writerTipe();
-            escritor.Write("\r\n");
+            string prevlogs = File.ReadAllText(rutaLog);
+            StreamWriter escritor = new StreamWriter(rutaLog);
+            escritor.Write(prevlogs);
             escritor.WriteLine(DateTime.Now.ToString("LOG yyyy/MM/dd HH:mm:ss"));
             escritor.WriteLine("Evento: " + mensaje);
             escritor.WriteLine("Duracion: " + decimal.Round(Convert.ToDecimal(tiempo.TotalMilliseconds), 3) + "ms");
@@ -30,26 +41,15 @@ namespace ListasArtesanales
 
         public void WriteLog(string mensaje, TimeSpan tiempo, Exception e)
         {
-            StreamWriter escritor = writerTipe();
+            string prevlogs = File.ReadAllText(rutaLog);
+            StreamWriter escritor = new StreamWriter(rutaLog);
+            escritor.Write(prevlogs);
             escritor.WriteLine(DateTime.Now.ToString("LOG yyyy/MM/dd HH:mm:ss"));
             escritor.WriteLine("Evento: " + mensaje);
             escritor.WriteLine("Excepcion: " + e.Message);
             escritor.WriteLine("Duracion: " + decimal.Round(Convert.ToDecimal(tiempo.TotalMilliseconds)) + "ms", 3);
             escritor.WriteLine("---- LOG END ----");
             escritor.Close();
-        }
-
-        private StreamWriter writerTipe()
-        {
-            try
-            {
-                return File.AppendText(HttpContext.Current.Server.MapPath("~\\log\\" + nombreLog));
-            }
-            catch
-            {
-                string ruta = "C:\\Users\\" + Environment.UserName + "\\" + nombreLog;
-                return new StreamWriter(ruta);
-            }
         }
     }
 }
