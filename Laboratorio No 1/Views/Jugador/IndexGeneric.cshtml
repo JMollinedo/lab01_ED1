@@ -7,20 +7,20 @@
 <h2>Players</h2>
 
 <p>
-    @Html.ActionLink("Create New Player", "Create")
+    @Html.ActionLink("Create New Player", "CreateGeneric")
 
 
 </p>
 <p ALIGN=right>
-    @Html.ActionLink("Delete by CSV", "Deleting")&nbsp;&nbsp;&nbsp; @Html.ActionLink("Import CSV", "Upload")
+    @Html.ActionLink("Delete by CSV", "DeletingGeneric")&nbsp;&nbsp;&nbsp; @Html.ActionLink("Import CSV", "UploadGeneric")
 </p>
 <p ALIGN="left">
-    @Html.ActionLink("Search by Name", "SerchByName") &nbsp;&nbsp;&nbsp;
-    @Html.ActionLink("Search by Last Name", "SearchByLastName")&nbsp;&nbsp;&nbsp; @Html.ActionLink("Search by Club", "SearchByClub")
-    &nbsp;&nbsp;&nbsp; @Html.ActionLink("Search by Position", "SearchByPosition")
-    &nbsp;&nbsp;&nbsp; Search By Salary: @Html.ActionLink("Greater than", "SearchBySalary", new { order = 1 })&nbsp;&nbsp;&nbsp;
-    @Html.ActionLink("Less than", "SearchBySalary", new { order = 2 })&nbsp;&nbsp;&nbsp;
-    @Html.ActionLink("Equal to", "SearchBySalary", new { order = 3 })
+    @Html.ActionLink("Search by Name", "SerchByNameGeneric") &nbsp;&nbsp;&nbsp;
+    @Html.ActionLink("Search by Last Name", "SearchByLastNameGeneric")&nbsp;&nbsp;&nbsp; @Html.ActionLink("Search by Club", "SearchByClubGeneric")
+    &nbsp;&nbsp;&nbsp; @Html.ActionLink("Search by Position", "SearchByPositionGeneric")
+    &nbsp;&nbsp;&nbsp; Search By Salary: @Html.ActionLink("Greater than", "SearchBySalaryGeneric", new { order = 1 })&nbsp;&nbsp;&nbsp;
+    @Html.ActionLink("Less than", "SearchBySalaryGeneric", new { order = 2 })&nbsp;&nbsp;&nbsp;
+    @Html.ActionLink("Equal to", "SearchBySalaryGeneric", new { order = 3 })
 </p>
 
 <table class="table">
@@ -63,9 +63,9 @@
                     @Html.DisplayFor(modelItem => item.position)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "EditGeneric", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "DetailsGeneric", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteGeneric", new { id = item.Id })
                 </td>
             </tr>
 
@@ -77,3 +77,5 @@
 <p ALIGN=right>
 
 </p>
+
+

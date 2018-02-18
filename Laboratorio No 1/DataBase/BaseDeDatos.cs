@@ -14,11 +14,20 @@ namespace Laboratorio_No_1.DataBase
         private static object syncRoot = new Object();
 
         public LinkList <Jugador> Players = new LinkList<Jugador>();
+        public LinkList<Jugador> SearchedPlayers = new LinkList<Jugador>();
+
+        //-----------------------------------------------Lista Artesanal Genérica--------------------------------------
+        public ListaDoble<Jugador> PlayersG = new ListaDoble<Jugador>();
+        public ListaDoble<Jugador> SearchedPlayersG = new ListaDoble<Jugador>();
+       
+
         public int ActualID { get; set; }
+        public int ActualIDG { get; set; }
 
         private BaseDeDatos()
         {
             ActualID = 0;
+            ActualIDG = 0;
         }
 
         public static BaseDeDatos getInstance
