@@ -15,6 +15,7 @@ namespace Laboratorio_No_1.DataBase
 
         public LinkList <Jugador> Players = new LinkList<Jugador>();
         public LinkList<Jugador> SearchedPlayers = new LinkList<Jugador>();
+        public LogWriter logger = new LogWriter();
 
         //-----------------------------------------------Lista Artesanal Genérica--------------------------------------
         public ListaDoble<Jugador> PlayersG = new ListaDoble<Jugador>();

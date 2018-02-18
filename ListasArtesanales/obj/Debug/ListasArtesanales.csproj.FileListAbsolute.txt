@@ -7,3 +7,4 @@ C:\Users\pablo\Desktop\Github\lab01_ED1\ListasArtesanales\bin\Debug\ListasArtesa
 C:\Users\pablo\Desktop\Github\lab01_ED1\ListasArtesanales\obj\Debug\ListasArtesanales.csprojResolveAssemblyReference.cache
 C:\Users\pablo\Desktop\Github\lab01_ED1\ListasArtesanales\obj\Debug\ListasArtesanales.dll
 C:\Users\pablo\Desktop\Github\lab01_ED1\ListasArtesanales\obj\Debug\ListasArtesanales.pdb
+C:\Users\jmoll\Documents\URL\ReposGitED1\lab01_ED1\ListasArtesanales\obj\Debug\ListasArtesanales.csprojResolveAssemblyReference.cache

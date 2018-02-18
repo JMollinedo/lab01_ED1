@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,11 +8,27 @@ namespace Laboratorio_No_1.Models
 {
     public class Jugador : IComparable
     {
+        [Key]
         public int Id { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo Requerido")]
+        [Display(Name = "Nombre")]
         public string Name { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo Requerido")]
+        [Display(Name = "Apellido")]
         public string LastName { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo Requerido")]
         public string Club { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo Requerido")]
+        [Display(Name = "Salario")]
+        [Range(0,double.MaxValue, ErrorMessage = "Fuera de Rango")]
         public double Salary { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo Requerido")]
+        [Display(Name = "Posicion")]
         public string position { get; set; }
 
         public int CompareTo(Jugador other)

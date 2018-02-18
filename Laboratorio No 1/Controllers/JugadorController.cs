@@ -21,13 +21,16 @@ namespace Laboratorio_No_1.Controllers
 
         public ActionResult Index()
         {
-                return View(Datos.Players);
-
+            DateTime inicial = DateTime.Now;
+            var data = Datos.Players;
+            Datos.logger.WriteLog("Mostrar vista index", DateTime.Now.Subtract(inicial));
+            return View(data);
         }
 
         // GET: Jugador/Details/5
         public ActionResult Details(int? id)
         {
+            DateTime inicial = DateTime.Now;
             if (id == null)
             {
                 return HttpNotFound();
@@ -37,13 +40,16 @@ namespace Laboratorio_No_1.Controllers
             {
                 return HttpNotFound();
             }
-            
-            return View(JugadorAMostrar);
+            var data = JugadorAMostrar;
+            Datos.logger.WriteLog("Mostrar detalles Jugador" + JugadorAMostrar.Id, DateTime.Now.Subtract(inicial));
+            return View(data);
         }
 
         // GET: Jugador/Create
         public ActionResult Create()
         {
+            DateTime inicial = DateTime.Now;
+            Datos.logger.WriteLog("Mostrar vista Crear Jugador", DateTime.Now.Subtract(inicial));
             return View();
         }
 
@@ -51,15 +57,18 @@ namespace Laboratorio_No_1.Controllers
         [HttpPost]
         public ActionResult Create(Jugador NuevoJugador)
         {
+            DateTime inicial = DateTime.Now;
             try
             {
                 // TODO: Add insert logic here
                 NuevoJugador.Id = ++Datos.ActualID;
                 Datos.Players.AddFirst(NuevoJugador);
+                Datos.logger.WriteLog("Crear Jugador", DateTime.Now.Subtract(inicial));
                 return RedirectToAction("Index");
             }
             catch
             {
+                Datos.logger.WriteLog("Falla en Crear Jugador", DateTime.Now.Subtract(inicial));
                 return View();
             }
         }
@@ -67,34 +76,33 @@ namespace Laboratorio_No_1.Controllers
         // GET: Jugador/Edit/5
         public ActionResult Edit(int? id)
         {
+            DateTime inicial = DateTime.Now;
             if (id==null)
             {
+                Datos.logger.WriteLog("Jugador no encontrado en lista", DateTime.Now.Subtract(inicial));
                 return HttpNotFound();
             }
-
-                Jugador JugadorBuscado = Datos.Players.FirstOrDefault(x => x.Id == id);
+            Jugador JugadorBuscado = Datos.Players.FirstOrDefault(x => x.Id == id);
             if (JugadorBuscado == null)
             {
+                Datos.logger.WriteLog("Jugador no encontrado en lista", DateTime.Now.Subtract(inicial));
                 return HttpNotFound();
             }
-                return View(JugadorBuscado);
-               
-            
-
-
-            
+            Datos.logger.WriteLog("Mostar vista Ediar Jugador "+JugadorBuscado.Id, DateTime.Now.Subtract(inicial));
+            return View(JugadorBuscado);
         }
 
         // POST: Jugador/Edit/5
         [HttpPost]
         public ActionResult Edit(FormCollection Collection)
         {
+            DateTime inicial = DateTime.Now;
             try
             {
-              
                 Jugador JugadorBuscado = Datos.Players.FirstOrDefault(x => x.Id == int.Parse(Collection["Id"]));
                 if (JugadorBuscado == null)
                 {
+                    Datos.logger.WriteLog("Jugador no encontrado en lista", DateTime.Now.Subtract(inicial));
                     return HttpNotFound();
                 }
                 JugadorBuscado.Name = Collection["Name"];
@@ -102,14 +110,12 @@ namespace Laboratorio_No_1.Controllers
                 JugadorBuscado.position = Collection["Position"];
                 JugadorBuscado.Salary = double.Parse(Collection["Salary"]);
                 JugadorBuscado.Club = Collection["Club"];
-
-
-
-
+                Datos.logger.WriteLog("Editar Jugador " + JugadorBuscado.Id, DateTime.Now.Subtract(inicial));
                 return RedirectToAction("Index");
             }
             catch
             {
+                Datos.logger.WriteLog("Falla en Editar Jugador", DateTime.Now.Subtract(inicial));
                 return View();
             }
         }
@@ -118,16 +124,19 @@ namespace Laboratorio_No_1.Controllers
         public ActionResult Delete(int? id)
 
         {
+            DateTime inicial = DateTime.Now;
             if (id == null)
             {
+                Datos.logger.WriteLog("Jugador no encontrado en lista", DateTime.Now.Subtract(inicial));
                 return HttpNotFound();
             }
             Jugador JugadorABorrar = Datos.Players.FirstOrDefault(x => x.Id == id);
             if (JugadorABorrar == null)
             {
+                Datos.logger.WriteLog("Jugador no encontrado en lista", DateTime.Now.Subtract(inicial));
                 return HttpNotFound();
             }
-
+            Datos.logger.WriteLog("Mostar vista Eliminar Jugador " + JugadorABorrar.Id, DateTime.Now.Subtract(inicial));
             return View(JugadorABorrar);
         }
 
@@ -135,19 +144,23 @@ namespace Laboratorio_No_1.Controllers
         [HttpPost]
         public ActionResult Delete(int id,FormCollection collection)
         {
+            DateTime inicial = DateTime.Now;
             try
             {
                 // TODO: Add delete logic here
                 Jugador JugadorABorrar = Datos.Players.FirstOrDefault(x => x.Id == id);
                 if (JugadorABorrar == null)
                 {
+                    Datos.logger.WriteLog("Jugador no encontrado en lista", DateTime.Now.Subtract(inicial));
                     HttpNotFound();
                 }
                 Datos.Players.Remove(JugadorABorrar);
+                Datos.logger.WriteLog("Eliminar Jugador" + JugadorABorrar.Id, DateTime.Now.Subtract(inicial));
                 return RedirectToAction("Index");
             }
             catch
             {
+                Datos.logger.WriteLog("Falla en Eliminar Jugador", DateTime.Now.Subtract(inicial));
                 return View();
             }
         }
@@ -156,6 +169,8 @@ namespace Laboratorio_No_1.Controllers
 
         public ActionResult Upload()
         {
+            DateTime inicial = DateTime.Now;
+            Datos.logger.WriteLog("Mostrar vista Importar .csv", DateTime.Now.Subtract(inicial));
             return View();
         }
 
@@ -163,12 +178,11 @@ namespace Laboratorio_No_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Upload(HttpPostedFileBase upload)
         {
+            DateTime inicial = DateTime.Now;
             if (ModelState.IsValid)
             {
-
                 if (upload != null && upload.ContentLength > 0)
                 {
-
                     if (upload.FileName.EndsWith(".csv"))
                     {
                         Stream stream = upload.InputStream;
@@ -179,31 +193,38 @@ namespace Laboratorio_No_1.Controllers
                         Linea = Lector.ReadLine();
                         while (Linea != null)
                         {
-                            //split de la linea
-                            string[] Atributos = Linea.Split(',');
-                            //Instacia del jugador
-                            Jugador NuevoJugador = new Jugador();
-
-                            //Asignación de atributos al objeto
-                            NuevoJugador.Club = Atributos[0];
-                            NuevoJugador.LastName = Atributos[1];
-                            NuevoJugador.Name = Atributos[2];
-                            NuevoJugador.position = Atributos[3];
-                            NuevoJugador.Salary = double.Parse(Atributos[4]);
-                            NuevoJugador.Id = ++Datos.ActualID;
-
-                            //Agregar jugador a la lista.
-                            Datos.Players.AddLast(NuevoJugador);
-
+                            try
+                            {
+                                //split de la linea
+                                string[] Atributos = Linea.Split(',');
+                                //Instacia del jugador
+                                Jugador NuevoJugador = new Jugador();
+                                //Asignación de atributos al objeto
+                                NuevoJugador.Club = Atributos[0];
+                                NuevoJugador.LastName = Atributos[1];
+                                NuevoJugador.Name = Atributos[2];
+                                NuevoJugador.position = Atributos[3];
+                                NuevoJugador.Salary = double.Parse(Atributos[4]);
+                                NuevoJugador.Id = ++Datos.ActualID;
+                                //Agregar jugador a la lista.
+                                Datos.Players.AddLast(NuevoJugador);
+                            }
+                            catch
+                            {
+                                Datos.logger.WriteLog("Falla en carga de .csv", DateTime.Now.Subtract(inicial));
+                                return View();
+                            }
                             //Leer siguiente linea
                             Linea  = Lector.ReadLine();
                         }
-                        
-                        return View("Index", Datos.Players);
+                        var data = Datos.Players;
+                        Datos.logger.WriteLog(stream + " importado con exito", DateTime.Now.Subtract(inicial));
+                        return View("Index", data);
                     }
                     else
                     {
                         ModelState.AddModelError("File", "This file format is not supported");
+                        Datos.logger.WriteLog("Falla en carga de .csv", DateTime.Now.Subtract(inicial));
                         return View();
                     }
                 }
@@ -212,11 +233,15 @@ namespace Laboratorio_No_1.Controllers
                     ModelState.AddModelError("File", "Please Upload Your file");
                 }
             }
+            Datos.logger.WriteLog("Falla en carga de .csv", DateTime.Now.Subtract(inicial));
             return View();
         }
 
         public ActionResult Deleting()
         {
+
+            DateTime inicial = DateTime.Now;
+            Datos.logger.WriteLog("Mostrar vista Borrar por .csv", DateTime.Now.Subtract(inicial));
             return View();
         }
 
@@ -224,12 +249,11 @@ namespace Laboratorio_No_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Deleting(HttpPostedFileBase upload)
         {
+            DateTime inicial = DateTime.Now;
             if (ModelState.IsValid)
             {
-
                 if (upload != null && upload.ContentLength > 0)
                 {
-
                     if (upload.FileName.EndsWith(".csv"))
                     {
                         Stream stream = upload.InputStream;
@@ -252,12 +276,14 @@ namespace Laboratorio_No_1.Controllers
                             //Leer siguiente linea
                             Linea = Lector.ReadLine();
                         }
-
-                        return View("Index", Datos.Players);
+                        var data = Datos.Players;
+                        Datos.logger.WriteLog("datos en " + stream + " borrados con exito", DateTime.Now.Subtract(inicial));
+                        return View("Index", data);
                     }
                     else
                     {
                         ModelState.AddModelError("File", "This file format is not supported");
+                        Datos.logger.WriteLog("Falla en carga de .csv", DateTime.Now.Subtract(inicial));
                         return View();
                     }
                 }
@@ -266,6 +292,7 @@ namespace Laboratorio_No_1.Controllers
                     ModelState.AddModelError("File", "Please Upload Your file");
                 }
             }
+            Datos.logger.WriteLog("Falla en carga de .csv", DateTime.Now.Subtract(inicial));
             return View();
         }
         //------------------------------------------------Aquí Empiezan las búsquedas----------------------------------------------
@@ -274,12 +301,16 @@ namespace Laboratorio_No_1.Controllers
         //-----------------------------------------------------Nombre--------------------------------------------------------------
         public ActionResult SerchByName()
         {
-            return View(Datos.Players);
+            DateTime inicial = DateTime.Now;
+            var data = Datos.Players;
+            Datos.logger.WriteLog("Mostrar vista Busqueda", DateTime.Now.Subtract(inicial));
+            return View(data);
         }
 
         [HttpPost]
         public ActionResult SerchByName(FormCollection Collection)
         {
+            DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
             foreach (var item in Datos.Players)
             {
@@ -288,18 +319,23 @@ namespace Laboratorio_No_1.Controllers
                     Datos.SearchedPlayers.AddLast(item);
                 }
             }
-                return View(Datos.SearchedPlayers);
-
+            var data = Datos.SearchedPlayers;
+            Datos.logger.WriteLog("Resultado Busqueda por Nombre " + Collection["Name"], DateTime.Now.Subtract(inicial));
+            return View(data);
         }
         //-----------------------------------------------------Apellido--------------------------------------------------------------
         public ActionResult SearchByLastName()
         {
-            return View(Datos.Players);
+            DateTime inicial = DateTime.Now;
+            var data = Datos.Players;
+            Datos.logger.WriteLog("Mostrar vista Busqueda", DateTime.Now.Subtract(inicial));
+            return View(data);
         }
 
         [HttpPost]
         public ActionResult SearchByLastName(FormCollection Collection)
         {
+            DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
             foreach (var item in Datos.Players)
             {
@@ -308,18 +344,24 @@ namespace Laboratorio_No_1.Controllers
                     Datos.SearchedPlayers.AddLast(item);
                 }
             }
-            return View(Datos.SearchedPlayers);
+            var data = Datos.SearchedPlayers;
+            Datos.logger.WriteLog("Resultado Busqueda por Apellido " + Collection["LastName"], DateTime.Now.Subtract(inicial));
+            return View(data);
 
         }
         //-----------------------------------------------------Club--------------------------------------------------------------
         public ActionResult SearchByClub()
         {
-            return View(Datos.Players);
+            DateTime inicial = DateTime.Now;
+            var data = Datos.Players;
+            Datos.logger.WriteLog("Mostrar vista Busqueda", DateTime.Now.Subtract(inicial));
+            return View(data);
         }
 
         [HttpPost]
         public ActionResult SearchByClub(FormCollection Collection)
         {
+            DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
             foreach (var item in Datos.Players)
             {
@@ -328,18 +370,24 @@ namespace Laboratorio_No_1.Controllers
                     Datos.SearchedPlayers.AddLast(item);
                 }
             }
-            return View(Datos.SearchedPlayers);
+            var data = Datos.SearchedPlayers;
+            Datos.logger.WriteLog("Resultado Busqueda por Club " + Collection["Club"], DateTime.Now.Subtract(inicial));
+            return View(data);
 
         }
         //-----------------------------------------------------Posición--------------------------------------------------------------
         public ActionResult SearchByPosition()
         {
-            return View(Datos.Players);
+            DateTime inicial = DateTime.Now;
+            var data = Datos.Players;
+            Datos.logger.WriteLog("Mostrar vista Busqueda", DateTime.Now.Subtract(inicial));
+            return View(data);
         }
 
         [HttpPost]
         public ActionResult SearchByPosition(FormCollection Collection)
         {
+            DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
             foreach (var item in Datos.Players)
             {
@@ -348,17 +396,23 @@ namespace Laboratorio_No_1.Controllers
                     Datos.SearchedPlayers.AddLast(item);
                 }
             }
-            return View(Datos.SearchedPlayers);
+            var data = Datos.SearchedPlayers;
+            Datos.logger.WriteLog("Resultado Busqueda por Posicion " + Collection["Position"], DateTime.Now.Subtract(inicial));
+            return View(data);
         }
         //-----------------------------------------------------Salario--------------------------------------------------------------
         public ActionResult SearchBySalary(int Order)
         {
-            return View(Datos.Players);
+            DateTime inicial = DateTime.Now;
+            var data = Datos.Players;
+            Datos.logger.WriteLog("Mostrar vista Busqueda", DateTime.Now.Subtract(inicial));
+            return View(data);
         }
 
         [HttpPost]
         public ActionResult SearchBySalary(int order, FormCollection Collection)
         {
+            DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
             if (order == 1)
             {
@@ -371,12 +425,14 @@ namespace Laboratorio_No_1.Controllers
                             Datos.SearchedPlayers.AddLast(item);
                         }
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-
+                        Datos.logger.WriteLog(
+                            "Falla en Busqueda por Salario " + Collection["Salary"],
+                            DateTime.Now.Subtract(inicial),
+                            e);
                         HttpNotFound();
                     }
-                    
                 }
             }
             else if(order == 2)
@@ -390,12 +446,14 @@ namespace Laboratorio_No_1.Controllers
                             Datos.SearchedPlayers.AddLast(item);
                         }
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-
+                        Datos.logger.WriteLog(
+                            "Falla en Busqueda por Salario " + Collection["Salary"],
+                            DateTime.Now.Subtract(inicial),
+                            e);
                         HttpNotFound();
                     }
-
                 }
             }
             else
@@ -409,33 +467,37 @@ namespace Laboratorio_No_1.Controllers
                             Datos.SearchedPlayers.AddLast(item);
                         }
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-
+                        Datos.logger.WriteLog(
+                            "Falla en Busqueda por Salario " + Collection["Salary"],
+                            DateTime.Now.Subtract(inicial),
+                            e);
                         HttpNotFound();
                     }
-
                 }
             }
-            
-            
+            var data = Datos.SearchedPlayers;
+            string comparacion = order == 1 ? "mayor que" : order == 2 ? "menor que" : "igual a";
+            comparacion += " ";
+            Datos.logger.WriteLog("Resultado Busqueda por Salario "+ comparacion + Collection["Salary"], DateTime.Now.Subtract(inicial));
             return View(Datos.SearchedPlayers);
-
         }
-
-
-
 
         //-------------------------------------------------------Implementación Lista Artesanal------------------------------------
 
         public ActionResult IndexGeneric()
         {
-            return View(Datos.PlayersG);
-
+            DateTime inicial = DateTime.Now;
+            var data = Datos.PlayersG;
+            Datos.logger.WriteLog("Mostrar vista index", DateTime.Now.Subtract(inicial));
+            return View(data);
         }
 
         public ActionResult CreateGeneric()
         {
+            DateTime inicial = DateTime.Now;
+            Datos.logger.WriteLog("Mostrar vista Crear Jugador", DateTime.Now.Subtract(inicial));
             return View();
         }
 
