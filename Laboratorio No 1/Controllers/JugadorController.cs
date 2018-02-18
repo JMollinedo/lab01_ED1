@@ -334,13 +334,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
-            foreach (var item in Datos.Players)
-            {
-                if (item.Name.ToUpper() == Collection["Name"].ToUpper())
-                {
-                    Datos.SearchedPlayers.AddLast(item);
-                }
-            }
+            Datos.SearchedPlayers = Datos.Players.Search(x => x.Name == Collection["Name"]);
             var data = Datos.SearchedPlayers;
             Datos.logger.WriteLog("Resultado Busqueda por Nombre " + Collection["Name"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -361,13 +355,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
-            foreach (var item in Datos.Players)
-            {
-                if (item.LastName.ToUpper() == Collection["LastName"].ToUpper())
-                {
-                    Datos.SearchedPlayers.AddLast(item);
-                }
-            }
+            Datos.SearchedPlayers = Datos.Players.Search(x => x.LastName == Collection["LastName"]);
             var data = Datos.SearchedPlayers;
             Datos.logger.WriteLog("Resultado Busqueda por Apellido " + Collection["LastName"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -389,13 +377,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
-            foreach (var item in Datos.Players)
-            {
-                if (item.Club.ToUpper() == Collection["Club"].ToUpper())
-                {
-                    Datos.SearchedPlayers.AddLast(item);
-                }
-            }
+            Datos.SearchedPlayers = Datos.Players.Search(x => x.Club == Collection["Club"]);
             var data = Datos.SearchedPlayers;
             Datos.logger.WriteLog("Resultado Busqueda por Club " + Collection["Club"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -416,13 +398,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
-            foreach (var item in Datos.Players)
-            {
-                if (item.position.ToUpper() == Collection["Position"].ToUpper())
-                {
-                    Datos.SearchedPlayers.AddLast(item);
-                }
-            }
+            Datos.SearchedPlayers = Datos.Players.Search(x => x.position == Collection["Position"]);
             var data = Datos.SearchedPlayers;
             Datos.logger.WriteLog("Resultado Busqueda por Posicion " + Collection["Position"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -444,16 +420,11 @@ namespace Laboratorio_No_1.Controllers
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
             if (order == 1)
-            {
-                foreach (var item in Datos.Players)
-                {
+            {             
                     try
                     {
-                        if (item.Salary > int.Parse(Collection["Salary"]))
-                        {
-                            Datos.SearchedPlayers.AddLast(item);
-                        }
-                    }
+                    Datos.SearchedPlayers = Datos.Players.Search(x => x.Salary > int.Parse(Collection["Salary"]));
+                }
                     catch (Exception e)
                     {
                         Datos.logger.WriteLog(
@@ -462,18 +433,14 @@ namespace Laboratorio_No_1.Controllers
                             e);
                         HttpNotFound();
                     }
-                }
+                
             }
             else if(order == 2)
             {
-                foreach (var item in Datos.Players)
-                {
+                
                     try
                     {
-                        if (item.Salary < int.Parse(Collection["Salary"]))
-                        {
-                            Datos.SearchedPlayers.AddLast(item);
-                        }
+                        Datos.SearchedPlayers = Datos.Players.Search(x => x.Salary < int.Parse(Collection["Salary"]));
                     }
                     catch (Exception e)
                     {
@@ -483,18 +450,14 @@ namespace Laboratorio_No_1.Controllers
                             e);
                         HttpNotFound();
                     }
-                }
+                
             }
             else
             {
-                foreach (var item in Datos.Players)
-                {
+                
                     try
                     {
-                        if (item.Salary == int.Parse(Collection["Salary"]))
-                        {
-                            Datos.SearchedPlayers.AddLast(item);
-                        }
+                        Datos.SearchedPlayers = Datos.Players.Search(x => x.Salary == int.Parse(Collection["Salary"]));
                     }
                     catch (Exception e)
                     {
@@ -504,7 +467,7 @@ namespace Laboratorio_No_1.Controllers
                             e);
                         HttpNotFound();
                     }
-                }
+                
             }
             var data = Datos.SearchedPlayers;
             string comparacion = order == 1 ? "mayor que" : order == 2 ? "menor que" : "igual a";
@@ -826,13 +789,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayersG.Clear();
-            foreach (var item in Datos.PlayersG)
-            {
-                if (item.Name.ToUpper() == Collection["Name"].ToUpper())
-                {
-                    Datos.SearchedPlayersG.Add(item);
-                }
-            }
+            Datos.SearchedPlayersG =  Datos.PlayersG.Search(x => x.Name == Collection["Name"]);
             var data = Datos.SearchedPlayersG;
             Datos.logger.WriteLog("Resultado Busqueda por Nombre " + Collection["Name"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -853,13 +810,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayersG.Clear();
-            foreach (var item in Datos.PlayersG)
-            {
-                if (item.LastName.ToUpper() == Collection["LastName"].ToUpper())
-                {
-                    Datos.SearchedPlayersG.Add(item);
-                }
-            }
+            Datos.SearchedPlayersG = Datos.PlayersG.Search(x => x.LastName == Collection["LastName"]);
             var data = Datos.SearchedPlayersG;
             Datos.logger.WriteLog("Resultado Busqueda por Apellido " + Collection["LastName"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -880,13 +831,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayersG.Clear();
-            foreach (var item in Datos.PlayersG)
-            {
-                if (item.Club.ToUpper() == Collection["Club"].ToUpper())
-                {
-                    Datos.SearchedPlayersG.Add(item);
-                }
-            }
+            Datos.SearchedPlayersG = Datos.PlayersG.Search(x => x.Club == Collection["Club"]);
             var data = Datos.SearchedPlayersG;
             Datos.logger.WriteLog("Resultado Busqueda por Club " + Collection["Club"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -907,13 +852,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayersG.Clear();
-            foreach (var item in Datos.PlayersG)
-            {
-                if (item.position.ToUpper() == Collection["Position"].ToUpper())
-                {
-                    Datos.SearchedPlayersG.Add(item);
-                }
-            }
+            Datos.SearchedPlayersG = Datos.PlayersG.Search(x => x.position.ToUpper() == Collection["Position"].ToUpper());
             var data = Datos.SearchedPlayersG;
             Datos.logger.WriteLog("Resultado Busqueda por Posicion " + Collection["Position"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -936,15 +875,11 @@ namespace Laboratorio_No_1.Controllers
             Datos.SearchedPlayersG.Clear();
             if (order == 1)
             {
-                foreach (var item in Datos.PlayersG)
-                {
+                
                     try
                     {
-                        if (item.Salary > int.Parse(Collection["Salary"]))
-                        {
-                            Datos.SearchedPlayersG.Add(item);
-                        }
-                    }
+                    Datos.SearchedPlayersG = Datos.PlayersG.Search(x => x.Salary > int.Parse(Collection["Salary"]));
+                }
                     catch (Exception e)
                     {
                         Datos.logger.WriteLog(
@@ -953,18 +888,14 @@ namespace Laboratorio_No_1.Controllers
                             e);
                         HttpNotFound();
                     }
-                }
+                
             }
             else if (order == 2)
             {
-                foreach (var item in Datos.PlayersG)
-                {
+                
                     try
                     {
-                        if (item.Salary < int.Parse(Collection["Salary"]))
-                        {
-                            Datos.SearchedPlayersG.Add(item);
-                        }
+                        Datos.SearchedPlayersG = Datos.PlayersG.Search(x => x.Salary < int.Parse(Collection["Salary"]));
                     }
                     catch (Exception  e)
                     {
@@ -974,18 +905,14 @@ namespace Laboratorio_No_1.Controllers
                             e);
                         HttpNotFound();
                     }
-                }
+                
             }
             else
             {
-                foreach (var item in Datos.PlayersG)
-                {
+              
                     try
                     {
-                        if (item.Salary == int.Parse(Collection["Salary"]))
-                        {
-                            Datos.SearchedPlayersG.Add(item);
-                        }
+                        Datos.SearchedPlayersG = Datos.PlayersG.Search(x => x.Salary == int.Parse(Collection["Salary"]));
                     }
                     catch (Exception e)
                     {
@@ -995,7 +922,7 @@ namespace Laboratorio_No_1.Controllers
                             e);
                         HttpNotFound();
                     }
-                }
+                
             }
             var data = Datos.SearchedPlayersG;
             string comparacion = order == 1 ? "mayor que" : order == 2 ? "menor que" : "igual a";
