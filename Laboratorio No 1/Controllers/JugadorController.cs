@@ -334,7 +334,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
-            Datos.SearchedPlayers = Datos.Players.Search(x => x.Name == Collection["Name"]);
+            Datos.SearchedPlayers = Datos.Players.Search(x => x.Name.ToUpper() == Collection["Name"].ToUpper());
             var data = Datos.SearchedPlayers;
             Datos.logger.WriteLog("Resultado Busqueda por Nombre " + Collection["Name"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -355,7 +355,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
-            Datos.SearchedPlayers = Datos.Players.Search(x => x.LastName == Collection["LastName"]);
+            Datos.SearchedPlayers = Datos.Players.Search(x => x.LastName.ToUpper() == Collection["LastName"].ToUpper());
             var data = Datos.SearchedPlayers;
             Datos.logger.WriteLog("Resultado Busqueda por Apellido " + Collection["LastName"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -377,7 +377,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
-            Datos.SearchedPlayers = Datos.Players.Search(x => x.Club == Collection["Club"]);
+            Datos.SearchedPlayers = Datos.Players.Search(x => x.Club.ToUpper() == Collection["Club"].ToUpper());
             var data = Datos.SearchedPlayers;
             Datos.logger.WriteLog("Resultado Busqueda por Club " + Collection["Club"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -398,7 +398,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayers.Clear();
-            Datos.SearchedPlayers = Datos.Players.Search(x => x.position == Collection["Position"]);
+            Datos.SearchedPlayers = Datos.Players.Search(x => x.position.ToUpper() == Collection["Position"].ToUpper());
             var data = Datos.SearchedPlayers;
             Datos.logger.WriteLog("Resultado Busqueda por Posicion " + Collection["Position"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -789,7 +789,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayersG.Clear();
-            Datos.SearchedPlayersG =  Datos.PlayersG.Search(x => x.Name == Collection["Name"]);
+            Datos.SearchedPlayersG =  Datos.PlayersG.Search(x => x.Name.ToUpper() == Collection["Name"].ToUpper());
             var data = Datos.SearchedPlayersG;
             Datos.logger.WriteLog("Resultado Busqueda por Nombre " + Collection["Name"], DateTime.Now.Subtract(inicial));
             return View(data);
@@ -810,7 +810,7 @@ namespace Laboratorio_No_1.Controllers
         {
             DateTime inicial = DateTime.Now;
             Datos.SearchedPlayersG.Clear();
-            Datos.SearchedPlayersG = Datos.PlayersG.Search(x => x.LastName == Collection["LastName"]);
+            Datos.SearchedPlayersG = Datos.PlayersG.Search(x => x.LastName.ToUpper() == Collection["LastName"].ToUpper());
             var data = Datos.SearchedPlayersG;
             Datos.logger.WriteLog("Resultado Busqueda por Apellido " + Collection["LastName"], DateTime.Now.Subtract(inicial));
             return View(data);

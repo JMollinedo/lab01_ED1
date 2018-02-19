@@ -51,7 +51,7 @@ namespace ListasArtesanales
                 Last = null;
                 Count--;
             }
-            else if (Count > 2)
+            else if (Count >= 2)
             {
                 Last.Next = First.Next;
                 First.Next.Prev = Last;
@@ -66,7 +66,7 @@ namespace ListasArtesanales
             {
                 RemoveFirst();
             }
-            else if (Count > 2)
+            else if (Count >= 2)
             {
                 First.Prev = Last.Prev;
                 Last.Prev.Next = First;
