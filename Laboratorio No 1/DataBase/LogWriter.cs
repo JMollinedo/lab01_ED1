@@ -17,14 +17,18 @@ namespace ListasArtesanales
             rutaLog = "log-LAB01_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".txt";
             try
             {
-                rutaLog = HttpContext.Current.Server.MapPath(rutaLog);
+                string aux = rutaLog;
+                aux = HttpContext.Current.Server.MapPath(rutaLog);
+                FileStream temp = File.Create(aux);
+                temp.Close();
+                rutaLog = aux;
             }
             catch
             {
                 rutaLog = "C:\\Users\\" + Environment.UserName + "\\" + rutaLog;
+                FileStream temp = File.Create(rutaLog);
+                temp.Close();
             }
-            FileStream temp = File.Create(rutaLog);
-            temp.Close();
         }
 
         public void WriteLog(string mensaje, TimeSpan tiempo)
